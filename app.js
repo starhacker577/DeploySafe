@@ -7,10 +7,10 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/health", (req, res) => {
-    res.json({ status: "Healthy", project: "DeploySafe Portfolio" });
+    res.json({ status: "Healthy", project: "Music player" });
 });
 
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`🚀 DeploySafe Portfolio running on port ${PORT}`);
+    console.log(`🚀 DeploySafe SafarMusicPlayergit status running on port ${PORT}`);
 });
