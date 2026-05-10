@@ -54,7 +54,7 @@ pipeline {
             steps {
 
                 bat '''
-                "C:\\Users\\Tushar Sharma\\AppData\\Local\\Microsoft\\WinGet\\Links\\trivy.exe" image --exit-code 0 --severity HIGH,CRITICAL deploysafe
+                "C:\\Users\\Tushar Sharma\\AppData\\Local\\Microsoft\\WinGet\\Links\\trivy.exe" image --skip-db-update deploysafe
                 '''
             }
         }
