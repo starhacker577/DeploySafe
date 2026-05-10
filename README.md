@@ -113,8 +113,8 @@ deploysafe-portfolio/
 
 Image is automatically pushed to Docker Hub on every successful build:
 ```
-docker pull aakash22sharma/deploysafe-portfolio:latest
-docker pull aakash22sharma/deploysafe-portfolio:build-<N>
+docker pull Tushar09sharma/deploysafe-SafarMusicPlayer:latest
+docker pull Tushar09sharma/deploysafe-SafarMusicPlayer:build-<N>
 ```
 
 ---
