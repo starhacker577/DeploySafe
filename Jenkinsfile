@@ -26,14 +26,19 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    bat '''
-                    sonar-scanner ^
-                    -Dsonar.projectKey=DeploySafeProject ^
-                    -Dsonar.sources=. ^
-                    -Dsonar.host.url=http://localhost:9000 ^
-                    -Dsonar.login=%SONAR_AUTH_TOKEN%
-                    '''
+                script {
+                    def scannerHome = tool 'SonarQubeScanner'
+
+                    withSonarQubeEnv('SonarQube') {
+
+                        bat """
+                        ${scannerHome}\\bin\\sonar-scanner.bat ^
+                        -Dsonar.projectKey=DeploySafeProject ^
+                        -Dsonar.projectName=DeploySafeProject ^
+                        -Dsonar.sources=. ^
+                        -Dsonar.host.url=http://localhost:9000
+                        """
+                    }
                 }
             }
         }
@@ -44,10 +49,34 @@ pipeline {
             }
         }
 
+        stage('Stop Old Container') {
+            steps {
+                bat 'docker stop deploysafe-container || exit 0'
+                bat 'docker rm deploysafe-container || exit 0'
+            }
+        }
+
         stage('Docker Run') {
             steps {
-                bat 'docker run -d -p 3000:3000 deploysafe'
+                bat 'docker run -d --name deploysafe-container -p 3000:3000 deploysafe'
             }
+        }
+
+        stage('Deployment Success') {
+            steps {
+                echo '✅ DeploySafe Project Successfully Deployed!'
+            }
+        }
+    }
+
+    post {
+
+        success {
+            echo '🎉 Pipeline Executed Successfully!'
+        }
+
+        failure {
+            echo '❌ Pipeline Failed!'
         }
     }
 }
