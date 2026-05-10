@@ -27,6 +27,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
+
                     def scannerHome = tool 'SonarQubeScanner'
 
                     withSonarQubeEnv('SonarQube') {
@@ -46,6 +47,15 @@ pipeline {
         stage('Docker Build') {
             steps {
                 bat 'docker build -t deploysafe .'
+            }
+        }
+
+        stage('Trivy Security Scan') {
+            steps {
+
+                bat '''
+                trivy image --exit-code 0 --severity HIGH,CRITICAL deploysafe
+                '''
             }
         }
 
