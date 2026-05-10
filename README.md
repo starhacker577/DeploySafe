@@ -141,7 +141,7 @@ docker pull aakash22sharma/deploysafe-portfolio:build-<N>
 
 ## 👨‍💻 Author
 
-**Aakash Thapliyal**
+**Tushar Sharma**
 MCA — Cloud Computing & DevOps
 Chandigarh University
-GitHub: [AakashThapliyal](https://github.com/AakashThapliyal)
+GitHub: [Tushar Sharma](https://github.com/starhacker577)
